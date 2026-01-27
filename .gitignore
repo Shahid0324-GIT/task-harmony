@@ -1,0 +1,5 @@
+/.env
+/.env.*
+/CHEATSHEET.md
+/__pycache__
+/venv
