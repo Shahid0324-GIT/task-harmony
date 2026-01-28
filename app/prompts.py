@@ -1,12 +1,17 @@
 import json
 import os
+import sys
+import os
+
+from lib.helper import BASE_DIR
+
+PORT_CODES_PATH = os.path.join(BASE_DIR, "data", "port_codes_reference.json")
 
 def load_port_codes():
     try:
-        path = 'port_codes_reference.json'
-        if not os.path.exists(path):
+        if not os.path.exists(PORT_CODES_PATH):
             return []
-        with open(path, 'r') as f:
+        with open(PORT_CODES_PATH, 'r') as f:
             return json.load(f)
     except Exception as e:
         print(f"Error loading port codes: {e}")

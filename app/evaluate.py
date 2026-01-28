@@ -1,4 +1,11 @@
 import json
+import sys
+import os
+
+from lib.helper import BASE_DIR
+
+OUTPUT_PATH = os.path.join(BASE_DIR, "result", "output.json")
+GROUND_TRUTH_PATH = os.path.join(BASE_DIR, "data", "ground_truth.json")
 
 def normalize_string(s):
     if s is None:
@@ -24,9 +31,9 @@ def compare_values(field, val1, val2):
 
 def main():
     try:
-        with open('output.json', 'r') as f:
+        with open(OUTPUT_PATH, 'r') as f:
             predictions = json.load(f)
-        with open('ground_truth.json', 'r') as f:
+        with open(GROUND_TRUTH_PATH, 'r') as f:
             ground_truth = json.load(f)
     except FileNotFoundError as e:
         print(f"Error loading files: {e}")

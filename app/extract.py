@@ -4,13 +4,20 @@ import time
 from dotenv import load_dotenv
 from groq import Groq
 from tqdm import tqdm
-from schemas import EmailExtractionOutput, ShipmentDetails
-from prompts import SYSTEM_PROMPT_FINAL, get_user_prompt
+from app.schemas import EmailExtractionOutput, ShipmentDetails
+from app.prompts import SYSTEM_PROMPT_FINAL, get_user_prompt
+import sys
+import os
+
+from lib.helper import BASE_DIR
 
 # Load environment variables
 load_dotenv()
 
 API_KEY = os.getenv("GROQ_API_KEY")
+EMAIL_PATH = os.path.join(BASE_DIR, "data", "emails_input.json")
+OUTPUT_PATH = os.path.join(BASE_DIR, "result", "output.json")
+
 
 def get_client():
     if not API_KEY:
@@ -80,7 +87,7 @@ def main():
         return
 
     try:
-        with open('emails_input.json', 'r') as f:
+        with open(EMAIL_PATH, 'r') as f:
             emails = json.load(f)
     except FileNotFoundError:
         print("Error: emails_input.json not found.")
@@ -98,7 +105,7 @@ def main():
         # Rate limiting helper (Groq free tier)
         time.sleep(1) 
         
-    with open('output.json', 'w') as f:
+    with open(OUTPUT_PATH, 'w') as f:
         json.dump(results, f, indent=2)
     
     print("Extraction complete. Results saved to output.json")
