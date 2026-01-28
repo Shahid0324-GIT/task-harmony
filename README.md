@@ -43,7 +43,7 @@ This repository contains the solution for the Task Harmony Backend/AI Engineer A
 4. **Run Extraction:**
 
    ```bash
-   python extract.py
+   python -m app.extract
    ```
 
    _Processes `emails_input.json` and generates `output.json`._
@@ -51,7 +51,7 @@ This repository contains the solution for the Task Harmony Backend/AI Engineer A
 5. **Evaluate Accuracy:**
 
    ```bash
-   python evaluate.py
+   python -m app.evaluate
    ```
 
    _Compares `output.json` against `ground_truth.json`._
